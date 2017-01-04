@@ -19,13 +19,13 @@ int main()
         x = x + velocity_x;
         y = y + velocity_y;
 
-        system("cls");
+        system("cls");//清屏函数
 
         for(i=0;i<x;i++)
             printf("\n");
         for(j=0;j<y;j++)
             printf(" ");
-        printf("o");
+        printf("o");//输出小球
         printf("\n");
         Sleep(50);
 
