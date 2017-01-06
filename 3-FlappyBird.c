@@ -47,12 +47,10 @@ void show()//显示画面
 		{
 			if ((i == bird_x)&&(j == bird_y))
 				printf("@");//输出小鸟
-			else if ((j == bar1_y)&&((i < bar1_xDown)||(i > bar1_xTop)))
-				printf("*");//输出墙壁
+			else if ((j == bar1_y - 2)&&((i < bar1_xDown)||(i > bar1_xTop)))
+				printf("***");//输出墙壁
 			else if ((i +1 == high)&&(j + 1 != width))
 				printf("_");
-			else if (j + 1 == width)
-				printf("|");
 			else
 				printf(" ");//输出空格
 		}
@@ -67,10 +65,13 @@ void updateWithoutInput()
 {
 	bird_x ++;
 	bar1_y --;
-	if (bird_y == bar1_y)
+	if ((bird_y >= bar1_y -2)&&(bird_y <= bar1_y))
 	{
 		if ((bird_x >= bar1_xDown)&&(bird_x <= bar1_xTop))
-			score ++;
+			{
+				if(bird_y == bar1_y)
+					score ++;
+			}
 		else
 		{
 			printf("游戏失败\n");
