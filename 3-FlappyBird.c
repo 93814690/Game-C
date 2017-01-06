@@ -9,14 +9,11 @@ int bar1_y,bar1_xDown,bar1_xTop;
 int score;
 
 
-//类似于清屏函数
-void gotoxy(int x,int y)
+//隐藏光标
+void HideCursor()
 {
-	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	COORD pos;
-	pos.X = x;
-	pos.Y = y;
-	SetConsoleCursorPosition(handle,pos);
+ CONSOLE_CURSOR_INFO cursor_info = {1, 0}; 
+ SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursor_info);
 }
 
 
@@ -38,7 +35,8 @@ void startup()
 //显示画面
 void show()//显示画面
 {
-	gotoxy(0,0);//清屏
+	system("cls");//清屏
+	HideCursor();
 	int i,j;
 
 	for (i = 0; i < high; i++)
