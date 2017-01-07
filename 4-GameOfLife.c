@@ -4,10 +4,11 @@
 #include "windows.h"
 #include "time.h"
 
-#define High 25
-#define Width 50
+#define High 30
+#define Width 60
 
 int cells[High][Width];
+int speed = 70;
 
 //隐藏光标
 void HideCursor()
@@ -59,7 +60,8 @@ void show()
 		}
 		printf("\n");
 	}
-	Sleep(50);
+	printf("操作说明：按+加速、按-减速\n");
+	Sleep(speed);
 }
 
 void updateWithoutInput()
@@ -87,7 +89,19 @@ void updateWithoutInput()
 
 void updateWithInput()
 {
-
+	char input;
+	if (kbhit())
+	{
+		input = getch();
+		if (input == '+')
+		{
+			speed *= 0.8;
+		}
+		if (input == '-')
+		{
+			speed *= 1.2;
+		}
+	}
 }
 
 int main()
