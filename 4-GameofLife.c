@@ -30,6 +30,7 @@ void cls(int x,int y)
 void startup()
 {
 	int i,j;
+	srand((unsigned)time(0));
 	for (i = 0;i < High;i++)
 		for (j = 0;j < Width;j++)
 		{
