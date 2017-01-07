@@ -18,8 +18,13 @@ void HideCursor()
 void startup()
 {
 	int i,j;
-	for (i = 0; i < High; i++)
+	for (i = 0;i < High;i++)
 		for (j = 0;j < Width;j++)
+		{
+			cells[i][j] = 0;
+		}
+	for (i = 1;i < High-1;i++)
+		for (j = 1;j < Width-1;j++)
 		{
 			cells[i][j] = rand() % 2;
 		}
@@ -30,9 +35,9 @@ void show()
 	HideCursor();
 	system("cls");
 	int i,j;
-	for (i = 0; i <= High; i++)
+	for (i = 1; i < High-1; i++)
 	{
-		for (j = 0; j <= Width; j++)
+		for (j = 1; j < Width-1; j++)
 		{
 			if (cells[i][j] == 1)
 				printf("*");
@@ -49,9 +54,9 @@ void updateWithoutInput()
 	int newCells[High][Width];
 	int neibourNumber;
 	int i,j;
-	for (i=1;i<=High-1;i++)
+	for (i=1;i<High-1;i++)
 	{
-		for (j=1;j<=Width-1;j++)
+		for (j=1;j<Width-1;j++)
 		{
 			neibourNumber =  cells[i-1][j-1] + cells[i-1][j] + cells[i-1][j+1] + cells[i][j-1] + cells[i][j+1] + cells[i+1][j-1] + cells[i+1][j] + cells[i+1][j+1];
 			if(neibourNumber == 3)
@@ -62,8 +67,8 @@ void updateWithoutInput()
 				newCells[i][j] = 0;
 		}
 	}
-	for (i=1;i<=High-1;i++)
-		for (j=1;j<=Width-1;j++)
+	for (i=1;i<High-1;i++)
+		for (j=1;j<Width-1;j++)
 			cells[i][j] = newCells[i][j];
 }
 
