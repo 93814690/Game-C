@@ -9,13 +9,16 @@
 
 int cells[High][Width];
 
+//隐藏光标
 void HideCursor()
 {
-	CONSOLE_CURSOR_INFO cursor_info = {1, 0};
+	CONSOLE_CURSOR_INFO cursor_info = {1, 0}; 
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursor_info);
 }
 
-void gotoxy(int x,int y)//类似于清屏函数
+
+//清屏函数
+void cls(int x,int y)
 {
     HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
     COORD pos;
@@ -23,7 +26,6 @@ void gotoxy(int x,int y)//类似于清屏函数
     pos.Y = y;
     SetConsoleCursorPosition(handle,pos);
 }
-
 
 void startup()
 {
@@ -43,7 +45,7 @@ void startup()
 void show()
 {
 	HideCursor();
-	gotoxy(0,0);
+	cls(0,0);
 	int i,j;
 	for (i = 1; i < High-1; i++)
 	{
