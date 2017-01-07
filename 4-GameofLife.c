@@ -15,6 +15,16 @@ void HideCursor()
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursor_info);
 }
 
+void gotoxy(int x,int y)//类似于清屏函数
+{
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    COORD pos;
+    pos.X = x;
+    pos.Y = y;
+    SetConsoleCursorPosition(handle,pos);
+}
+
+
 void startup()
 {
 	int i,j;
@@ -33,7 +43,7 @@ void startup()
 void show()
 {
 	HideCursor();
-	system("cls");
+	gotoxy(0,0);
 	int i,j;
 	for (i = 1; i < High-1; i++)
 	{
