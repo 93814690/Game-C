@@ -15,6 +15,14 @@ void HideCursor()//隐藏光标
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursor_info);
 }
 
+void gotoxy(int x,int y)//类似于清屏函数，光标移动到原点位置进行重画
+{
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    COORD pos;
+    pos.X = x;
+    pos.Y = y;
+    SetConsoleCursorPosition(handle,pos);
+}
 
 
 void startup()
@@ -33,7 +41,7 @@ void startup()
 
 void show()
 {
-	system("cls");
+	gotoxy(0,0);  // 光标移动到原点位置进行重画清屏
 	int i,j;
 	for (i = 0; i < high; i++)
 	{
@@ -78,7 +86,9 @@ void updateWithoutInput()
 	{
 		enemy_x++;
 		speed = 0;
-	}	
+	}
+
+	HideCursor();
 }
 
 void updateWithInput()
@@ -87,13 +97,13 @@ void updateWithInput()
 	if (kbhit())//
 	{
 		input = getch();//
-		if (input == 'a')
+		if (input == 'a' && position_y > 0)
 			position_y--;
-		if (input == 'd')
+		if (input == 'd' && position_y < width-1)
 			position_y++;
-		if (input == 'w')
+		if (input == 'w' && position_x > 0)
 			position_x--;
-		if (input == 's')
+		if (input == 's' && position_x < high-1)
 			position_x++;
 		if (input == ' ')
 		{
@@ -111,7 +121,6 @@ int main()
 		show();//显示画面
 		updateWithoutInput();//与用户输入无关的更新
 		updateWithInput();//与用户输入有关的更新
-		HideCursor();
 	}
 
 	return 0;
